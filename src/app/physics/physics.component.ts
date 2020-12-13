@@ -1,5 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { P5JSInvoker } from '../p5JSInvoker';
+import { Ball } from "./prefabs/ball";
 
 @Component({
   selector: 'app-physics',
@@ -7,24 +8,35 @@ import { P5JSInvoker } from '../p5JSInvoker';
   styleUrls: ['../agario/agar.component.scss']
 })
 export class PhysicsComponent extends P5JSInvoker implements AfterViewInit {
-  private p5;
+  private p5: any;
+  private ball: Ball;
 
   constructor() {
     super();
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     this.startP5JS(document.getElementById('container'));
   }
 
-  preload(p5): void {
+  public preload(p5): void {
   }
 
-  setup(p5): void {
-    this.p5 = p5.createCanvas(1024, 700);
+  public setup(p5): void {
+    this.p5 = p5.createCanvas(1024, 500);
+    this.p5.translate(this.p5.width / 2, this.p5.height / 2);
+    this.ball = new Ball(p5, this.p5);
   }
 
-  draw(p5): void {
+  public draw(p5): void {
+    this.updateScene();
+    this.ball.update();
+    this.ball.show();
+  }
+
+  private updateScene(): void {
+    this.p5.background(200);
+    this.p5.translate(this.p5.width / 2, this.p5.height / 2);
   }
 
 }
