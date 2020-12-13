@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as io from 'socket.io-client/dist/socket.io';
 
+export const FIELD_SIZE = 3500;
+
 @Injectable({
   providedIn: 'root',
 })
-export class SocketService {
-  private socket: any;
-  readonly url: string = 'http://192.168.1.236:3000';
+export class GameSocketService {
+  public socket: any;
+  readonly url: string = 'http://localhost:3000';
 
   constructor() {
     this.socket = io(this.url);
