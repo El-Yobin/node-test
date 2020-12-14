@@ -8,35 +8,64 @@ export class Ball {
   ) { }
 
   public position = this.p5.createVector(this.p5.random(-200, 200), this.p5.random(-200, 200));
-  public radius = 50;
+  public mass = this.p5.random(0.5, 4);
+  public radius = this.mass * 10;
   private acceleration = this.p5.createVector(0, 0);
   private velocity = this.p5.createVector(0, 0);
   private center = this.p5.createVector(this.canvas.width / 2, this.canvas.height / 2);
-  private relativeMousePos = this.p5.createVector(0, 0);
 
   public show(): void {
     this.p5.circle(this.position.x, this.position.y, this.radius);
   }
 
   public update(): void {
-    if (this.p5.mouseIsPressed) {
-      this.relativeMousePos = p5Methods.Vector.sub(this.p5.createVector(
-        this.p5.mouseX - this.center.x, this.p5.mouseY - this.center.y
-      ), this.position);
-      this.acceleration = this.relativeMousePos.normalize();
-    } else {
-      this.acceleration.mult(0);
-    }
-    this.position = this.position.add(this.velocity.add(this.acceleration).add(0, 0.1));
-    this.edges();
+    this.bounceFromEdges();
+    this.moveToMouse();
+    this.applyGravity();
+    this.applyFriction(0.01);
+
+    this.applyAcceleration();
+    this.resetAcceleration();
   }
 
-  private edges(): void {
-    if ((this.position.x >= this.center.x - 25) || (this.position.x <= -this.center.x + this.radius / 2)) {
-      this.velocity.x *= -1;
+
+  public applyForce(force: p5Methods.Vector): void {
+    this.acceleration.add(force.div(this.mass));
+  }
+
+  private bounceFromEdges(): void {
+    if ((this.position.x >= this.center.x - this.radius / 2) || (this.position.x <= -this.center.x + this.radius / 2)) {
+      this.velocity.x *= -0.7;
     }
-    if ((this.position.y >= this.center.y - 25) || (this.position.y <= -this.center.y + this.radius / 2)) {
-      this.velocity.y *= -1;
+    if ((this.position.y >= this.center.y - this.radius / 2) || (this.position.y <= -this.center.y + this.radius / 2)) {
+      this.velocity.y *= -0.7;
     }
+  }
+
+  private moveToMouse(): void {
+    if (this.p5.mouseIsPressed) {
+      const mousePosition = this.p5.createVector(this.p5.mouseX - this.center.x, this.p5.mouseY - this.center.y);
+      const vectorToMouse = mousePosition.sub(this.position);
+      this.applyForce(vectorToMouse.setMag(0.3));
+    }
+  }
+
+  private applyGravity(): void {
+    if (this.position.y + this.radius / 2 < this.canvas.height / 2) {
+      this.acceleration.add(0, 0.1);
+    }
+  }
+
+  private applyFriction(frictionCoefficient): void {
+    const friction = this.velocity.copy().normalize().mult(-frictionCoefficient);
+    this.applyForce(friction);
+  }
+
+  private applyAcceleration(): void {
+    this.position = this.position.add(this.velocity.add(this.acceleration));
+  }
+
+  private resetAcceleration(): void {
+    this.acceleration.mult(0);
   }
 }

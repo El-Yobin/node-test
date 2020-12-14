@@ -24,19 +24,12 @@ export class PhysicsComponent extends P5JSInvoker implements AfterViewInit {
 
   public setup(p5): void {
     this.p5 = p5.createCanvas(1024, 500);
-    this.p5.translate(this.p5.width / 2, this.p5.height / 2);
-    for (let i = 0; i < 10; i++) {
-      const ball = new Ball(p5, this.p5);
-      this.balls.push(ball);
-    }
+    this.generateBalls(p5);
   }
 
   public draw(p5): void {
     this.updateScene();
-    this.balls.forEach(ball => {
-      ball.update();
-      ball.show();
-    });
+    this.updateBalls();
   }
 
   private updateScene(): void {
@@ -44,4 +37,17 @@ export class PhysicsComponent extends P5JSInvoker implements AfterViewInit {
     this.p5.translate(this.p5.width / 2, this.p5.height / 2);
   }
 
+  private generateBalls(p5): void {
+    for (let i = 0; i < 20; i++) {
+      const ball = new Ball(p5, this.p5);
+      this.balls.push(ball);
+    }
+  }
+
+  private updateBalls(): void {
+    this.balls.forEach(ball => {
+      ball.update();
+      ball.show();
+    });
+  }
 }
