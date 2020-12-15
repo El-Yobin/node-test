@@ -21,8 +21,9 @@ export class Ball {
   public update(): void {
     this.bounceFromEdges();
     this.moveToMouse();
-    this.applyGravity();
-    this.applyFriction(0.01);
+    // this.applyGravity();
+    // this.applyFriction(0.005);
+    // this.applyDrag(0.003);
 
     this.applyAcceleration();
     this.resetAcceleration();
@@ -46,7 +47,7 @@ export class Ball {
     if (this.p5.mouseIsPressed) {
       const mousePosition = this.p5.createVector(this.p5.mouseX - this.center.x, this.p5.mouseY - this.center.y);
       const vectorToMouse = mousePosition.sub(this.position);
-      this.applyForce(vectorToMouse.setMag(0.3));
+      this.applyForce(vectorToMouse.setMag(0.5));
     }
   }
 
@@ -56,9 +57,16 @@ export class Ball {
     }
   }
 
-  private applyFriction(frictionCoefficient): void {
+  private applyFriction(frictionCoefficient: number): void {
     const friction = this.velocity.copy().normalize().mult(-frictionCoefficient);
     this.applyForce(friction);
+  }
+
+  private applyDrag(dragCoefficient: number): void {
+    const speed = this.velocity.mag();
+    const dragForce = this.velocity.copy().normalize();
+    dragForce.mult(-dragCoefficient * speed * speed);
+    this.applyForce(dragForce);
   }
 
   private applyAcceleration(): void {
