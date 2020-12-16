@@ -5,10 +5,11 @@ export class Ball {
   constructor(
     private p5: p5InstanceExtensions,
     private canvas: any,
-  ) { }
+    private mass: number,
+    public position?: p5Methods.Vector,
+  ) {
+  }
 
-  public position = this.p5.createVector(this.p5.random(-200, 200), this.p5.random(-200, 200));
-  public mass = this.p5.random(0.5, 4);
   public radius = this.mass * 10;
   private acceleration = this.p5.createVector(0, 0);
   private velocity = this.p5.createVector(0, 0);
@@ -19,7 +20,7 @@ export class Ball {
   }
 
   public update(): void {
-    this.bounceFromEdges();
+    // this.bounceFromEdges();
     this.moveToMouse();
     // this.applyGravity();
     // this.applyFriction(0.005);
@@ -32,6 +33,15 @@ export class Ball {
 
   public applyForce(force: p5Methods.Vector): void {
     this.acceleration.add(force.div(this.mass));
+  }
+
+  public calculateAttractionForce(another: Ball): p5Methods.Vector {
+    const force = p5Methods.Vector.sub(this.position, another.position);
+    let distance = force.mag();
+    force.normalize();
+    distance =  this.p5.constrain(distance, 5, 25);
+
+    return force.mult((this.mass * another.mass) / (distance * distance));
   }
 
   private bounceFromEdges(): void {
@@ -47,7 +57,7 @@ export class Ball {
     if (this.p5.mouseIsPressed) {
       const mousePosition = this.p5.createVector(this.p5.mouseX - this.center.x, this.p5.mouseY - this.center.y);
       const vectorToMouse = mousePosition.sub(this.position);
-      this.applyForce(vectorToMouse.setMag(0.5));
+      this.applyForce(vectorToMouse.setMag(0.2));
     }
   }
 
