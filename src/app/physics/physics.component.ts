@@ -12,6 +12,7 @@ export class PhysicsComponent extends P5JSInvoker implements AfterViewInit {
   private p5: any;
   private balls: Ball[] = [];
   private bigBoi: Ball;
+  private smolBoi: Ball;
 
   constructor() {
     super();
@@ -25,8 +26,14 @@ export class PhysicsComponent extends P5JSInvoker implements AfterViewInit {
   }
 
   public setup(p5): void {
-    this.p5 = p5.createCanvas(1024, 500);
+    this.p5 = p5.createCanvas(1400, 700);
     this.bigBoi = new Ball(p5, this.p5, 13, p5.createVector(0, 0));
+    this.smolBoi = new Ball(p5, this.p5, 4, p5.createVector(200, 200));
+    this.smolBoi.applyForce(p5.createVector(2, -2));
+    this.balls.push(this.smolBoi);
+    this.smolBoi = new Ball(p5, this.p5, 4, p5.createVector(0, 350));
+    this.smolBoi.applyForce(p5.createVector(-3, 0));
+    this.balls.push(this.smolBoi);
     this.generateBalls(p5);
   }
 
@@ -43,8 +50,9 @@ export class PhysicsComponent extends P5JSInvoker implements AfterViewInit {
   }
 
   private generateBalls(p5): void {
-    for (let i = 0; i < 50; i++) {
-      const ball = new Ball(p5, this.p5, 1, p5.createVector(p5.random(-400, -300), p5.random(-200, 200)));
+    for (let i = 0; i < 100; i++) {
+      const ball = new Ball(p5, this.p5, 1, p5.createVector(p5.random(-500, 500), p5.random(-500, 500)));
+      ball.applyForce(p5.createVector(p5.random(-1, 1), p5.random(-1, 1)));
       this.balls.push(ball);
     }
   }
@@ -52,13 +60,12 @@ export class PhysicsComponent extends P5JSInvoker implements AfterViewInit {
   private updateBalls(): void {
     this.balls.forEach(ball => {
       this.p5.fill(255);
-      const attractionForce = this.bigBoi.calculateAttractionForce(ball);
-      ball.applyForce(attractionForce);
-      ball.update();
-      ball.show();
       if (p5Methods.Vector.dist(ball.position, this.bigBoi.position) < this.bigBoi.radius / 2) {
        this.balls = this.balls.filter(current => ball !== current);
       }
+      ball.applyForce(this.bigBoi.calculateAttractionForce(ball));
+      ball.update();
+      ball.show();
     });
   }
 }

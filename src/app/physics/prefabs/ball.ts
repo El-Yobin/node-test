@@ -12,7 +12,7 @@ export class Ball {
 
   public radius = this.mass * 10;
   private acceleration = this.p5.createVector(0, 0);
-  private velocity = this.p5.createVector(0, 0);
+  public velocity = this.p5.createVector(0, 0);
   private center = this.p5.createVector(this.canvas.width / 2, this.canvas.height / 2);
 
   public show(): void {
@@ -37,11 +37,9 @@ export class Ball {
 
   public calculateAttractionForce(another: Ball): p5Methods.Vector {
     const force = p5Methods.Vector.sub(this.position, another.position);
-    let distance = force.mag();
+    const distance = force.mag();
     force.normalize();
-    distance =  this.p5.constrain(distance, 5, 25);
-
-    return force.mult((this.mass * another.mass) / (distance * distance));
+    return force.mult((this.mass * another.mass) / ((distance * distance) / 25));
   }
 
   private bounceFromEdges(): void {
