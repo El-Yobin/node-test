@@ -13,9 +13,9 @@ import { RotationComponent } from './rotation/rotation.component';
     PhysicsComponent,
     RotationComponent
   ],
-    imports: [
-        BrowserModule,
-    ],
+  imports: [
+    BrowserModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
