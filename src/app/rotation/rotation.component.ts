@@ -9,8 +9,6 @@ import * as p5Methods from 'p5';
 })
 export class RotationComponent extends P5JSInvoker implements AfterViewInit {
   public p5: any;
-  public in = 1;
-  public out = 1;
   private radius = 250;
   private angle = 25;
   private movingIn = true;
@@ -43,12 +41,12 @@ export class RotationComponent extends P5JSInvoker implements AfterViewInit {
   private updateBall(p5): void {
     this.angle += this.angularVelocity;
     if (this.movingIn) {
-      this.radius -= this.in;
+      this.radius -= 13;
       if (this.radius < 1) {
         this.movingIn = false;
       }
     } else {
-      this.radius += this.out;
+      this.radius += 42;
       if (this.radius > 255) {
         this.movingIn = true;
       }
