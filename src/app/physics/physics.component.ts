@@ -1,7 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { P5JSInvoker } from '../p5JSInvoker';
-import { Ball } from './prefabs/ball';
 import * as p5Methods from 'p5';
+import { Ball } from './ball';
 
 @Component({
   selector: 'app-physics',
@@ -26,10 +26,6 @@ export class PhysicsComponent extends P5JSInvoker implements AfterViewInit {
 
   public setup(p5): void {
     this.p5 = p5.createCanvas(1400, 700);
-    this.bigBoi = new Ball(p5, this.p5, 13, p5.createVector(0, 0));
-    const smolBoi = new Ball(p5, this.p5, 4, p5.createVector(200, 200));
-    smolBoi.applyForce(p5.createVector(2, -2));
-    this.balls.push(smolBoi);
     this.generateBalls(p5);
   }
 
@@ -47,7 +43,7 @@ export class PhysicsComponent extends P5JSInvoker implements AfterViewInit {
 
   private generateBalls(p5): void {
     for (let i = 0; i < 100; i++) {
-      const ball = new Ball(p5, this.p5, 1, p5.createVector(p5.random(-500, 500), p5.random(-500, 500)));
+      const ball = new Ball(p5, this.p5, p5.createVector(p5.random(-500, 500), p5.random(-500, 500)), 1);
       ball.applyForce(p5.createVector(p5.random(-1.5, 1.5), p5.random(-1.5, 1.5)));
       this.balls.push(ball);
     }
@@ -55,13 +51,17 @@ export class PhysicsComponent extends P5JSInvoker implements AfterViewInit {
 
   private updateBalls(): void {
     this.balls.forEach(ball => {
+      this.destroyFallenBall(ball);
       this.p5.fill(255);
-      if (p5Methods.Vector.dist(ball.position, this.bigBoi.position) < this.bigBoi.radius / 2) {
-       this.balls = this.balls.filter(current => ball !== current);
-      }
       ball.applyForce(this.bigBoi.calculateAttractionForce(ball));
       ball.update();
       ball.show();
     });
+  }
+
+  private destroyFallenBall(ball: Ball): void {
+    if (p5Methods.Vector.dist(ball.position, this.bigBoi.position) < this.bigBoi.radius / 2) {
+      this.balls = this.balls.filter(current => ball !== current);
+    }
   }
 }
