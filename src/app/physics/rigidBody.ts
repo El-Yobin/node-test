@@ -25,13 +25,6 @@ export abstract class RigidBody {
     this.acceleration.add(force.div(this.mass));
   }
 
-  public calculateAttractionForce(another: RigidBody): p5Methods.Vector {
-    const force = p5Methods.Vector.sub(this.position, another.position);
-    const distance = force.mag();
-    force.normalize();
-    return force.mult((this.mass * another.mass) / ((distance * distance) / 25));
-  }
-
   public applyGravity(gravityForce: number): void {
       this.acceleration.add(0, gravityForce);
   }

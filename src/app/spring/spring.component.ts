@@ -1,7 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { P5JSInvoker } from '../p5JSInvoker';
 import * as p5Methods from 'p5';
-import { calculateSpringForce } from '../physics/spring';
+import { calculateSpringForce } from '../physics/calculations';
 import { Ball } from '../physics/ball';
 
 @Component({

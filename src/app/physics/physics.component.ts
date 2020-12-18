@@ -2,6 +2,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import { P5JSInvoker } from '../p5JSInvoker';
 import * as p5Methods from 'p5';
 import { Ball } from './ball';
+import { calculateAttractionForce } from './calculations';
 
 @Component({
   selector: 'app-physics',
@@ -27,6 +28,7 @@ export class PhysicsComponent extends P5JSInvoker implements AfterViewInit {
   public setup(p5): void {
     this.p5 = p5.createCanvas(1400, 700);
     this.generateBalls(p5);
+    this.bigBoi = new Ball(p5, this.p5, p5.createVector(0, 0), 50);
   }
 
   public draw(p5): void {
@@ -51,17 +53,13 @@ export class PhysicsComponent extends P5JSInvoker implements AfterViewInit {
 
   private updateBalls(): void {
     this.balls.forEach(ball => {
-      this.destroyFallenBall(ball);
+      if (p5Methods.Vector.dist(ball.position, this.bigBoi.position) < this.bigBoi.radius / 2) {
+        this.balls = this.balls.filter(current => ball !== current);
+      }
       this.p5.fill(255);
-      ball.applyForce(this.bigBoi.calculateAttractionForce(ball));
+      ball.applyForce(calculateAttractionForce(this.bigBoi, ball));
       ball.update();
       ball.show();
     });
-  }
-
-  private destroyFallenBall(ball: Ball): void {
-    if (p5Methods.Vector.dist(ball.position, this.bigBoi.position) < this.bigBoi.radius / 2) {
-      this.balls = this.balls.filter(current => ball !== current);
-    }
   }
 }
