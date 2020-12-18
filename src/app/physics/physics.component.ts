@@ -28,7 +28,7 @@ export class PhysicsComponent extends P5JSInvoker implements AfterViewInit {
   public setup(p5): void {
     this.p5 = p5.createCanvas(1400, 700);
     this.generateBalls(p5);
-    this.bigBoi = new Ball(p5, this.p5, p5.createVector(0, 0), 50);
+    this.bigBoi = new Ball(p5, this.p5, p5.createVector(0, 0), 50, 50);
   }
 
   public draw(p5): void {
@@ -44,7 +44,7 @@ export class PhysicsComponent extends P5JSInvoker implements AfterViewInit {
   }
 
   private generateBalls(p5): void {
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 1000; i++) {
       const ball = new Ball(p5, this.p5, p5.createVector(p5.random(-500, 500), p5.random(-500, 500)), 1);
       ball.applyForce(p5.createVector(p5.random(-1.5, 1.5), p5.random(-1.5, 1.5)));
       this.balls.push(ball);
