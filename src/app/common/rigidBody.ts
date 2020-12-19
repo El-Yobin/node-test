@@ -2,14 +2,18 @@ import * as p5Methods from 'p5';
 import { p5InstanceExtensions } from 'p5';
 
 export abstract class RigidBody {
+  public mass = 1;
+  public position: any;
+  public acceleration: any;
+  public velocity: any;
+
   protected constructor(
     protected p5: p5InstanceExtensions,
   ) {
+    this.acceleration = this.p5.createVector(0, 0);
+    this.velocity = this.p5.createVector(0, 0);
+    this.position = this.p5.createVector(0, 0);
   }
-  public mass = 1;
-  public position: p5Methods.Vector;
-  public acceleration = this.p5.createVector(0, 0);
-  public velocity = this.p5.createVector(0, 0);
 
   abstract show(): void;
 

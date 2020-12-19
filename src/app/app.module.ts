@@ -6,6 +6,7 @@ import { AgarComponent } from './agario/agar.component';
 import { PlanetsComponent } from './planets/planets.component';
 import { SpringComponent } from './spring/spring.component';
 import { AppRoutingModule } from './routing.module';
+import { ParticlesComponent } from './particles/particles.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { AppRoutingModule } from './routing.module';
     AgarComponent,
     PlanetsComponent,
     SpringComponent,
+    ParticlesComponent,
   ],
   imports: [
     BrowserModule,

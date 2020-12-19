@@ -5,8 +5,9 @@ export abstract class P5JSInvoker {
   abstract setup(p: p5): void;
   abstract draw(p: p5): void;
 
-  protected startP5JS(containerElement: HTMLElement): void {
-    new p5(this.generate_sketch(), containerElement);
+  protected startP5JS(containerElement: HTMLElement): p5 {
+    // noinspection JSPotentiallyInvalidConstructorUsage
+    return new p5(this.generate_sketch(), containerElement);
   }
 
   private generate_sketch(): any {

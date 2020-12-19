@@ -6,8 +6,8 @@ import { Planet } from '../planets/planet';
 
 @Component({
   selector: 'app-spring',
-  templateUrl: '../common/template.component.html',
-  styleUrls: ['../common/template.component.scss']
+  templateUrl: '../common/template/template.component.html',
+  styleUrls: ['../common/template/template.component.scss']
 })
 export class SpringComponent extends P5JSInvoker implements AfterViewInit, OnDestroy {
   private p5: any;

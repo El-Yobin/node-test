@@ -6,8 +6,8 @@ import { calculateAttractionForce } from '../common/calculations';
 
 @Component({
   selector: 'app-physics',
-  templateUrl: '../common/template.component.html',
-  styleUrls: ['../common/template.component.scss']
+  templateUrl: '../common/template/template.component.html',
+  styleUrls: ['../common/template/template.component.scss']
 })
 export class PlanetsComponent extends P5JSInvoker implements AfterViewInit, OnDestroy {
   private p5: any;
