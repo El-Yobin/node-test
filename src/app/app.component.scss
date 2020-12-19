@@ -1,13 +1,21 @@
 .nav-bar {
   display: flex;
+  align-items: center;
   list-style: none;
-  justify-content: space-between;
-  width: 200px;
+  font-size: 18px;
+  height: 50px;
+  margin: 0;
+  background: #222222;
 
-  li {
-    a {
-      color: white;
-      text-decoration: none;
-    }
+  &__link {
+    color: white;
+    text-decoration: none;
+    margin: 12px;
   }
 }
+
+.active {
+  color: aquamarine;
+}
+
+

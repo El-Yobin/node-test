@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { FIELD_SIZE, GameSocketService } from './game-socket.service';
-import { P5JSInvoker } from '../p5JSInvoker';
+import { P5JSInvoker } from '../common/p5JSInvoker';
 import { Blob } from './blob';
 
 

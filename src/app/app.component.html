@@ -1,7 +1,6 @@
-  <ul class="nav-bar" >
-    <li><a [routerLink]="'agario'" >Agario</a></li>
-    <li><a [routerLink]="'planets'" >Physics</a></li>
-    <li><a [routerLink]="'spring'" >Spring</a></li>
-  </ul>
-
+<ul class="nav-bar">
+  <li><a class="nav-bar__link" [routerLinkActive]="'active'" [routerLink]="'agario'" >Agario</a></li>
+  <li><a class="nav-bar__link" [routerLinkActive]="'active'" [routerLink]="'planets'" >Physics</a></li>
+  <li><a class="nav-bar__link" [routerLinkActive]="'active'" [routerLink]="'spring'" >Spring</a></li>
+</ul>
 <router-outlet></router-outlet>

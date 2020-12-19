@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { P5JSInvoker } from '../p5JSInvoker';
+import { P5JSInvoker } from '../common/p5JSInvoker';
 import * as p5Methods from 'p5';
 import { calculateSpringForce } from '../common/calculations';
 import { Planet } from '../planets/planet';
