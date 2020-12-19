@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AgarComponent } from './agario/agar.component';
-import { PhysicsComponent } from './physics/physics.component';
+import { PlanetsComponent } from './planets/planets.component';
 import { SpringComponent } from './spring/spring.component';
 
 const routes: Routes = [
   { path: 'agario', component: AgarComponent },
-  { path: 'physics', component: PhysicsComponent },
+  { path: 'planets', component: PlanetsComponent },
   { path: 'spring', component: SpringComponent }
 ];
 

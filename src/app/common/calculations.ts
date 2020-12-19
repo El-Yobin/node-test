@@ -1,5 +1,5 @@
 import * as p5Methods from 'p5';
-import { RigidBody } from '../physics/rigidBody';
+import { RigidBody } from '../planets/rigidBody';
 
 export function calculateSpringForce(
   object: RigidBody,

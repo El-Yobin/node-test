@@ -6,8 +6,8 @@ import { Blob } from './blob';
 
 @Component({
   selector: 'app-agar',
-  templateUrl: './agar.component.html',
-  styleUrls: ['./agar.component.scss']
+  templateUrl: '../common/template.component.html',
+  styleUrls: ['../common/template.component.scss']
 })
 export class AgarComponent extends P5JSInvoker implements AfterViewInit, OnDestroy {
   constructor(

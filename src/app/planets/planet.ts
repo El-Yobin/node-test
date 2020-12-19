@@ -2,7 +2,7 @@ import { RigidBody } from './rigidBody';
 import { p5InstanceExtensions } from 'p5';
 import * as p5Methods from 'p5';
 
-export class Ball extends RigidBody {
+export class Planet extends RigidBody {
   constructor(
      public p5: p5InstanceExtensions,
      public position: p5Methods.Vector,

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AgarComponent } from './agario/agar.component';
-import { PhysicsComponent } from './physics/physics.component';
+import { PlanetsComponent } from './planets/planets.component';
 import { SpringComponent } from './spring/spring.component';
 import { AppRoutingModule } from './routing.module';
 
@@ -11,7 +11,7 @@ import { AppRoutingModule } from './routing.module';
   declarations: [
     AppComponent,
     AgarComponent,
-    PhysicsComponent,
+    PlanetsComponent,
     SpringComponent,
   ],
   imports: [

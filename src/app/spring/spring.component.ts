@@ -1,17 +1,17 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { P5JSInvoker } from '../p5JSInvoker';
 import * as p5Methods from 'p5';
-import { calculateSpringForce } from '../methods/calculations';
-import { Ball } from '../physics/ball';
+import { calculateSpringForce } from '../common/calculations';
+import { Planet } from '../planets/planet';
 
 @Component({
   selector: 'app-spring',
-  templateUrl: '../agario/agar.component.html',
-  styleUrls: ['../agario/agar.component.scss']
+  templateUrl: '../common/template.component.html',
+  styleUrls: ['../common/template.component.scss']
 })
 export class SpringComponent extends P5JSInvoker implements AfterViewInit, OnDestroy {
   private p5: any;
-  private bob: Ball;
+  private bob: Planet;
   private origin: p5Methods.Vector;
 
   constructor() {
@@ -28,7 +28,7 @@ export class SpringComponent extends P5JSInvoker implements AfterViewInit, OnDes
   public setup(p5): void {
     this.p5 = p5.createCanvas(1000, 600);
     this.p5.background(0);
-    this.bob = new Ball(p5, p5.createVector(0, 0), 1, 20);
+    this.bob = new Planet(p5, p5.createVector(0, 0), 1, 20);
     this.origin = p5.createVector(0, -200);
   }
 

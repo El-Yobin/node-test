@@ -1,18 +1,18 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { P5JSInvoker } from '../p5JSInvoker';
 import * as p5Methods from 'p5';
-import { Ball } from './ball';
-import { calculateAttractionForce } from '../methods/calculations';
+import { Planet } from './planet';
+import { calculateAttractionForce } from '../common/calculations';
 
 @Component({
   selector: 'app-physics',
-  templateUrl: '../agario/agar.component.html',
-  styleUrls: ['../agario/agar.component.scss']
+  templateUrl: '../common/template.component.html',
+  styleUrls: ['../common/template.component.scss']
 })
-export class PhysicsComponent extends P5JSInvoker implements AfterViewInit, OnDestroy {
+export class PlanetsComponent extends P5JSInvoker implements AfterViewInit, OnDestroy {
   private p5: any;
-  private balls: Ball[] = [];
-  private bigBoi: Ball;
+  private balls: Planet[] = [];
+  private bigBoi: Planet;
 
   constructor() {
     super();
@@ -28,7 +28,7 @@ export class PhysicsComponent extends P5JSInvoker implements AfterViewInit, OnDe
   public setup(p5): void {
     this.p5 = p5.createCanvas(1000, 600);
     this.generateBalls(p5);
-    this.bigBoi = new Ball(p5, p5.createVector(0, 0), 20, 50);
+    this.bigBoi = new Planet(p5, p5.createVector(0, 0), 20, 50);
   }
 
   public draw(p5): void {
@@ -45,7 +45,7 @@ export class PhysicsComponent extends P5JSInvoker implements AfterViewInit, OnDe
 
   private generateBalls(p5): void {
     for (let i = 0; i < 200; i++) {
-      const ball = new Ball(p5, p5.createVector(p5.random(-500, 500), p5.random(-500, 500)), 1, 10);
+      const ball = new Planet(p5, p5.createVector(p5.random(-500, 500), p5.random(-500, 500)), 1, 10);
       ball.applyForce(p5.createVector(p5.random(-1.5, 1.5), p5.random(-1.5, 1.5)));
       this.balls.push(ball);
     }
