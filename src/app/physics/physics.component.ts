@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { P5JSInvoker } from '../p5JSInvoker';
 import * as p5Methods from 'p5';
 import { Ball } from './ball';
@@ -9,7 +9,7 @@ import { calculateAttractionForce } from './calculations';
   templateUrl: './physics.component.html',
   styleUrls: ['../agario/agar.component.scss']
 })
-export class PhysicsComponent extends P5JSInvoker implements AfterViewInit {
+export class PhysicsComponent extends P5JSInvoker implements AfterViewInit, OnDestroy {
   private p5: any;
   private balls: Ball[] = [];
   private bigBoi: Ball;
@@ -61,5 +61,9 @@ export class PhysicsComponent extends P5JSInvoker implements AfterViewInit {
       ball.update();
       ball.show();
     });
+  }
+
+  public ngOnDestroy(): void {
+    this.p5.remove();
   }
 }

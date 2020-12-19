@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { AgarComponent } from './agario/agar.component';
 import { PhysicsComponent } from './physics/physics.component';
 import { SpringComponent } from './spring/spring.component';
+import { AppRoutingModule } from './routing.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { SpringComponent } from './spring/spring.component';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

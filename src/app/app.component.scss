@@ -1,0 +1,13 @@
+.nav-bar {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  width: 200px;
+
+  li {
+    a {
+      color: white;
+      text-decoration: none;
+    }
+  }
+}

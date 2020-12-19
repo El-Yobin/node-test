@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { FIELD_SIZE, GameSocketService } from './game-socket.service';
 import { P5JSInvoker } from '../p5JSInvoker';
 import { Blob } from './prefabs/blob';
@@ -9,7 +9,7 @@ import { Blob } from './prefabs/blob';
   templateUrl: './agar.component.html',
   styleUrls: ['./agar.component.scss']
 })
-export class AgarComponent extends P5JSInvoker implements AfterViewInit {
+export class AgarComponent extends P5JSInvoker implements AfterViewInit, OnDestroy {
   constructor(
     private socketService: GameSocketService,
   ) {
@@ -33,8 +33,7 @@ export class AgarComponent extends P5JSInvoker implements AfterViewInit {
     this.p5 = p5.createCanvas(1024, 700);
     this.createPlayer(p5);
     this.generateBlobs(p5, FIELD_SIZE / 10);
-    this.subscribeToHeartbeat();
-    this.p5.requestPointerLock();
+    // this.subscribeToHeartbeat();
   }
 
   public draw(p5): void {
@@ -128,5 +127,9 @@ export class AgarComponent extends P5JSInvoker implements AfterViewInit {
     this.socketService.listen('heartbeat').subscribe(data => {
       this.enemies = data;
     });
+  }
+
+  public ngOnDestroy(): void {
+    this.p5.remove();
   }
 }

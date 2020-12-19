@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { P5JSInvoker } from '../p5JSInvoker';
 import * as p5Methods from 'p5';
 import { calculateSpringForce } from '../physics/calculations';
@@ -9,7 +9,7 @@ import { Ball } from '../physics/ball';
   templateUrl: './spring.component.html',
   styleUrls: ['../agario/agar.component.scss']
 })
-export class SpringComponent extends P5JSInvoker implements AfterViewInit {
+export class SpringComponent extends P5JSInvoker implements AfterViewInit, OnDestroy {
   private p5: any;
   private bob: Ball;
   private origin: p5Methods.Vector;
@@ -47,4 +47,9 @@ export class SpringComponent extends P5JSInvoker implements AfterViewInit {
     this.p5.line(this.origin.x, this.origin.y, this.bob.position.x, this.bob.position.y);
     this.bob.show();
   }
+
+   public ngOnDestroy(): void {
+      console.log('destroyed');
+      this.p5.remove();
+   }
 }
