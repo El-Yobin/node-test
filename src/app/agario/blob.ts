@@ -1,5 +1,5 @@
 import { p5InstanceExtensions } from 'p5';
-import { FIELD_SIZE } from '../game-socket.service';
+import { FIELD_SIZE } from './game-socket.service';
 
 export class Blob {
   constructor(

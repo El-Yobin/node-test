@@ -1,8 +1,8 @@
 import * as p5Methods from 'p5';
-import { RigidBody } from './rigidBody';
+import { RigidBody } from '../physics/rigidBody';
 
 export function calculateSpringForce(
-  object: any,
+  object: RigidBody,
   origin: p5Methods.Vector,
   restLength: number,
   coefficient: number,

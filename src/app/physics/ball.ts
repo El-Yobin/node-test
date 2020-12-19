@@ -4,17 +4,13 @@ import * as p5Methods from 'p5';
 
 export class Ball extends RigidBody {
   constructor(
-     p5: p5InstanceExtensions,
-     canvas: any,
-     position: p5Methods.Vector,
-     mass = 1,
-     public radius: number = 1,
+     public p5: p5InstanceExtensions,
+     public position: p5Methods.Vector,
+     public mass = 1,
+     public radius: number,
   ) {
     super(
       p5,
-      canvas,
-      position,
-      mass,
     );
   }
 

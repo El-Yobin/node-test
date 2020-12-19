@@ -3,16 +3,13 @@ import { p5InstanceExtensions } from 'p5';
 
 export abstract class RigidBody {
   protected constructor(
-    public p5: p5InstanceExtensions,
-    public canvas: any,
-    public position: p5Methods.Vector,
-    public mass: number,
+    protected p5: p5InstanceExtensions,
   ) {
   }
-
+  public mass = 1;
+  public position: p5Methods.Vector;
   public acceleration = this.p5.createVector(0, 0);
   public velocity = this.p5.createVector(0, 0);
-  public center = this.p5.createVector(this.canvas.width / 2, this.canvas.height / 2);
 
   abstract show(): void;
 
@@ -26,7 +23,7 @@ export abstract class RigidBody {
   }
 
   public applyGravity(gravityForce: number): void {
-      this.acceleration.add(0, gravityForce);
+    this.acceleration.add(0, gravityForce);
   }
 
   public applyDrag(dragCoefficient: number): void {

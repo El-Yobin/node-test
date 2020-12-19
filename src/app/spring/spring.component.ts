@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { P5JSInvoker } from '../p5JSInvoker';
 import * as p5Methods from 'p5';
-import { calculateSpringForce } from '../physics/calculations';
+import { calculateSpringForce } from '../methods/calculations';
 import { Ball } from '../physics/ball';
 
 @Component({
   selector: 'app-spring',
-  templateUrl: './spring.component.html',
+  templateUrl: '../agario/agar.component.html',
   styleUrls: ['../agario/agar.component.scss']
 })
 export class SpringComponent extends P5JSInvoker implements AfterViewInit, OnDestroy {
@@ -28,7 +28,7 @@ export class SpringComponent extends P5JSInvoker implements AfterViewInit, OnDes
   public setup(p5): void {
     this.p5 = p5.createCanvas(1000, 600);
     this.p5.background(0);
-    this.bob = new Ball(p5, this.p5, p5.createVector(0, 0), 2);
+    this.bob = new Ball(p5, p5.createVector(0, 0), 1, 20);
     this.origin = p5.createVector(0, -200);
   }
 
@@ -39,8 +39,8 @@ export class SpringComponent extends P5JSInvoker implements AfterViewInit, OnDes
   }
 
   private updateBob(): void {
-    this.bob.applyGravity(0.01);
-    this.bob.applyDrag(0.01);
+    this.bob.applyGravity(1);
+    this.bob.applyDrag(0.005);
     this.bob.applyForce(calculateSpringForce(this.bob, this.origin, 200, 0.01));
     this.bob.moveToMouse(2);
     this.bob.update();
@@ -49,7 +49,6 @@ export class SpringComponent extends P5JSInvoker implements AfterViewInit, OnDes
   }
 
    public ngOnDestroy(): void {
-      console.log('destroyed');
       this.p5.remove();
    }
 }

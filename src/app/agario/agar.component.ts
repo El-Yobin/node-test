@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { FIELD_SIZE, GameSocketService } from './game-socket.service';
 import { P5JSInvoker } from '../p5JSInvoker';
-import { Blob } from './prefabs/blob';
+import { Blob } from './blob';
 
 
 @Component({
-  selector: 'app-game',
+  selector: 'app-agar',
   templateUrl: './agar.component.html',
   styleUrls: ['./agar.component.scss']
 })
@@ -30,7 +30,7 @@ export class AgarComponent extends P5JSInvoker implements AfterViewInit, OnDestr
   }
 
   public setup(p5): void {
-    this.p5 = p5.createCanvas(1024, 700);
+    this.p5 = p5.createCanvas(1000, 600);
     this.createPlayer(p5);
     this.generateBlobs(p5, FIELD_SIZE / 10);
     // this.subscribeToHeartbeat();
