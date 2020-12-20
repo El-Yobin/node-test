@@ -7,14 +7,14 @@ export class Agent {
   public acceleration: any;
   private readonly maxSpeed: number;
   private readonly maxSteeringForce: number;
-  private size = 3;
+  private readonly size = 3;
 
   constructor(
     private p5: p5InstanceExtensions
   ) {
     this.position = p5.createVector(0, 0);
     this.velocity = p5.createVector(0, 0);
-    this.acceleration = p5.createVector(0, 0);
+    this.acceleration = p5.createVector(p5.random(-5, 5), p5.random(-5, 5));
     this.maxSpeed = 7;
     this.maxSteeringForce = 0.4;
   }
@@ -34,18 +34,33 @@ export class Agent {
   }
 
   public update(): void {
-    this.updatePosition();
-  }
-
-  public seek(target): void {
-    const desired = p5Methods.Vector.sub(target, this.position);
-    const steeringForce = p5Methods.Vector.sub(desired, this.velocity);
-    this.acceleration.add(steeringForce.limit(this.maxSteeringForce));
-  }
-
-  private updatePosition(): void {
     this.velocity.add(this.acceleration).limit(this.maxSpeed);
     this.position.add(this.velocity);
     this.acceleration.mult(0);
   }
+
+  public seek(target): void {
+    const desired = this.getDesiredVector(target, 100);
+    const steeringForce = p5Methods.Vector.sub(desired, this.velocity);
+    this.acceleration.add(steeringForce.limit(this.maxSteeringForce));
+  }
+
+
+  public avoid(chaser): void {
+    const distanceToChaser = p5Methods.Vector.dist(chaser.position, this.position);
+    if (distanceToChaser < 30) {
+      const oppositeDesired = this.getDesiredVector(chaser.position, 50).mult(-1);
+      this.acceleration.add(oppositeDesired.limit(this.maxSteeringForce));
+    }
+  }
+
+  private getDesiredVector(target, finalDistance: number): any {
+    const desired = p5Methods.Vector.sub(target, this.position);
+    const distance = p5Methods.Vector.dist(this.position, target);
+    if (distance < finalDistance) {
+      desired.setMag(this.p5.map(distance, 0, 100, 0, this.maxSpeed));
+    }
+    return desired;
+  }
+
 }
