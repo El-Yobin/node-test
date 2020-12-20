@@ -22,7 +22,7 @@ export abstract class RigidBody {
     this.resetAcceleration();
   }
 
-  public applyForce(force: p5Methods.Vector): void {
+  public applyForce(force: any): void {
     this.acceleration.add(force.div(this.mass));
   }
 

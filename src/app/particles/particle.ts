@@ -3,7 +3,6 @@ import { RigidBody } from '../common/rigidBody';
 
 export class Particle extends RigidBody{
   public position;
-  private startForce;
 
   constructor(
    public p5: p5InstanceExtensions,
@@ -12,6 +11,7 @@ export class Particle extends RigidBody{
 ) {
     super(p5);
     this.position = this.p5.createVector(x, y);
+    this.applyForce(this.p5.createVector(this.p5.random(-5, 5), this.p5.random(-5, 5)));
   }
 
   public show(): void {

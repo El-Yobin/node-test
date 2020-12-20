@@ -38,6 +38,8 @@ export class ParticlesComponent extends P5JSInvoker implements AfterViewInit {
   }
 
   private mouseClicked(event): void {
-    this.particleSystem.addParticle(new Particle(this.p5Instance, event.layerX, event.layerY));
+    for (let i = 0; i < 20; i++) {
+      this.particleSystem.addParticle(new Particle(this.p5Instance, event.layerX, event.layerY));
+    }
   }
 }
