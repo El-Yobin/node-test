@@ -30,7 +30,7 @@ export abstract class RigidBody {
     this.acceleration.add(0, gravityForce);
   }
 
-  public applyDrag(dragCoefficient: number): void {
+  public applyAirResistance(dragCoefficient: number): void {
     const speed = this.velocity.mag();
     const dragForce = this.velocity.copy().normalize();
     dragForce.mult(-dragCoefficient * speed * speed);

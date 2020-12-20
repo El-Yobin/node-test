@@ -40,7 +40,7 @@ export class SpringComponent extends P5JSInvoker implements AfterViewInit, OnDes
 
   private updateBob(): void {
     this.bob.applyGravity(1);
-    this.bob.applyDrag(0.005);
+    this.bob.applyAirResistance(0.005);
     this.bob.applyForce(calculateSpringForce(this.bob, this.origin, 200, 0.01));
     this.bob.moveToMouse(2);
     this.bob.update();
