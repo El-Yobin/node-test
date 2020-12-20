@@ -3,6 +3,7 @@ import { P5JSInvoker } from '../common/p5JSInvoker';
 import { ParticleSystem } from './particle-system';
 import { Particle } from './particle';
 import * as p5Methods from 'p5';
+import { Queue } from "../common/queue";
 
 @Component({
   selector: 'app-particles',

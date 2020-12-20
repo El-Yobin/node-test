@@ -1,23 +1,24 @@
 import { Particle } from './particle';
+import { Queue } from '../common/queue';
 
 export class ParticleSystem {
-  private particles: Particle[];
+  private queue: Queue;
 
   constructor() {
-    this.particles = [];
+    this.queue = new Queue();
   }
 
   public addParticle(particle: Particle): void {
-    this.particles.unshift(particle);
+    this.queue.add(particle);
   }
 
   public run(): void {
-    this.particles.forEach(particle => {
+    this.queue.getAllAsArray().forEach(particle => {
       particle.update();
       particle.show();
 
       if (particle.isDead()) {
-        this.particles.pop();
+        this.queue.get();
       }
     });
   }
