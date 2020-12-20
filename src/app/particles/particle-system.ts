@@ -17,7 +17,7 @@ export class ParticleSystem {
       particle.update();
       particle.show();
 
-      if (this.particles.length > 60) {
+      if (particle.isDead()) {
         this.particles.pop();
       }
     });
