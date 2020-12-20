@@ -37,11 +37,11 @@ export abstract class RigidBody {
     this.applyForce(dragForce);
   }
 
-  public moveToMouse(force: number): void {
+  public moveToMouse(efficiency: number): void {
     if (this.p5.mouseIsPressed) {
       const mousePosition = this.p5.createVector(this.p5.mouseX - this.p5.width / 2, this.p5.mouseY - this.p5.height / 2);
       const vectorToMouse = mousePosition.sub(this.position);
-      this.applyForce(vectorToMouse.setMag(force));
+      this.applyForce(vectorToMouse.setMag(efficiency));
     }
   }
 

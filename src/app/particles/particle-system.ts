@@ -13,7 +13,7 @@ export class ParticleSystem {
 
   public run(): void {
     this.particles.forEach(particle => {
-      particle.applyGravity(0.5);
+      particle.applyDrag(0.05);
       particle.update();
       particle.show();
 

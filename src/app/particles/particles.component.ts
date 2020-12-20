@@ -16,6 +16,7 @@ export class ParticlesComponent extends P5JSInvoker implements AfterViewInit {
 
   constructor() {
     super();
+    this.particleSystem = new ParticleSystem();
   }
 
   public ngAfterViewInit(): void {
@@ -28,7 +29,6 @@ export class ParticlesComponent extends P5JSInvoker implements AfterViewInit {
   public setup(p5): void {
     this.p5Instance = p5;
     this.canvas = p5.createCanvas(1000, 600);
-    this.particleSystem = new ParticleSystem();
     this.canvas.mouseClicked((event) => this.mouseClicked(event));
   }
 
@@ -38,7 +38,7 @@ export class ParticlesComponent extends P5JSInvoker implements AfterViewInit {
   }
 
   private mouseClicked(event): void {
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 35; i++) {
       this.particleSystem.addParticle(new Particle(this.p5Instance, event.layerX, event.layerY));
     }
   }

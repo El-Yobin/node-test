@@ -3,6 +3,7 @@ import { RigidBody } from '../common/rigidBody';
 
 export class Particle extends RigidBody{
   public position;
+  public radius;
   private opacity = 255;
 
   constructor(
@@ -12,12 +13,13 @@ export class Particle extends RigidBody{
 ) {
     super(p5);
     this.position = this.p5.createVector(x, y);
-    this.applyForce(this.p5.createVector(this.p5.random(-10, 10), this.p5.random(-5, 5)));
+    this.radius = this.p5.random(5, 30);
+    this.applyForce(this.p5.createVector(this.p5.random(-10, 10), this.p5.random(-10, 10)));
   }
 
   public show(): void {
     this.p5.fill(255, this.opacity);
-    this.p5.circle(this.position.x, this.position.y, 10);
+    this.p5.circle(this.position.x, this.position.y, this.radius);
     this.opacity -= this.p5.deltaTime / 2;
   }
 
