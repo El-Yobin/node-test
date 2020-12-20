@@ -3,7 +3,6 @@ import { P5JSInvoker } from '../common/p5JSInvoker';
 import { ParticleSystem } from './particle-system';
 import { Particle } from './particle';
 import * as p5Methods from 'p5';
-import { Queue } from "../common/queue";
 
 @Component({
   selector: 'app-particles',
@@ -36,7 +35,7 @@ export class ParticlesComponent extends P5JSInvoker implements AfterViewInit {
 
     setInterval(() => {
       this.particleSystem.addParticle(new Particle(this.p5Instance, this.particleImage, 0, 0));
-    }, 25);
+    }, 50);
   }
 
   public draw(p5): void {

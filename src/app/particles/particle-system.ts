@@ -2,7 +2,7 @@ import { Particle } from './particle';
 import { Queue } from '../common/queue';
 
 export class ParticleSystem {
-  private queue: Queue;
+  private queue: Queue<Particle>;
 
   constructor() {
     this.queue = new Queue();

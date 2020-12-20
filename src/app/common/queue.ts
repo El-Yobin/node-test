@@ -1,14 +1,14 @@
-export class Queue {
+export class Queue<T> {
   private storage = {};
   private lowestIndex = 0;
   private highestIndex = 0;
 
-  public add(item: any): void {
+  public add(item: T): void {
     this.storage[this.highestIndex] = item;
     this.highestIndex += 1;
   }
 
-  public get(): any {
+  public get(): T {
     const oldestItem = this.storage[this.lowestIndex];
     delete this.storage[this.lowestIndex];
     this.lowestIndex += 1;
@@ -20,7 +20,7 @@ export class Queue {
    return this.highestIndex - this.lowestIndex;
   }
 
-  public getAllAsArray(): any[] {
+  public getAllAsArray(): T[] {
    return Object.values(this.storage);
   }
 }
