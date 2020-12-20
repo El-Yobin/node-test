@@ -4,12 +4,14 @@ import { AgarComponent } from './agario/agar.component';
 import { PlanetsComponent } from './planets/planets.component';
 import { SpringComponent } from './spring/spring.component';
 import { ParticlesComponent } from './particles/particles.component';
+import { AutonomousAgentsComponent } from './autonomous-agents/autonomous-agents.component';
 
 const routes: Routes = [
   { path: 'agario', component: AgarComponent },
   { path: 'planets', component: PlanetsComponent },
   { path: 'spring', component: SpringComponent },
-  { path: 'particles', component: ParticlesComponent }
+  { path: 'particles', component: ParticlesComponent },
+  { path: 'autonomous-agents', component: AutonomousAgentsComponent }
 ];
 
 @NgModule({

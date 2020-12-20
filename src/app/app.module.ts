@@ -7,6 +7,7 @@ import { PlanetsComponent } from './planets/planets.component';
 import { SpringComponent } from './spring/spring.component';
 import { AppRoutingModule } from './routing.module';
 import { ParticlesComponent } from './particles/particles.component';
+import { AutonomousAgentsComponent } from './autonomous-agents/autonomous-agents.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ParticlesComponent } from './particles/particles.component';
     PlanetsComponent,
     SpringComponent,
     ParticlesComponent,
+    AutonomousAgentsComponent,
   ],
   imports: [
     BrowserModule,
