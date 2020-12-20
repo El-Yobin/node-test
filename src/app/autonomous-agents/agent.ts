@@ -34,6 +34,7 @@ export class Agent {
   }
 
   public update(): void {
+    this.appearFromEdges();
     this.velocity.add(this.acceleration).limit(this.maxSpeed);
     this.position.add(this.velocity);
     this.acceleration.mult(0);
@@ -48,7 +49,7 @@ export class Agent {
 
   public avoid(chaser): void {
     const distanceToChaser = p5Methods.Vector.dist(chaser.position, this.position);
-    if (distanceToChaser < 30) {
+    if (distanceToChaser < 25) {
       const oppositeDesired = this.getDesiredVector(chaser.position, 50).mult(-1);
       this.acceleration.add(oppositeDesired.limit(this.maxSteeringForce));
     }
@@ -61,6 +62,21 @@ export class Agent {
       desired.setMag(this.p5.map(distance, 0, 100, 0, this.maxSpeed));
     }
     return desired;
+  }
+
+  private appearFromEdges(): void {
+    if (this.position.x > this.p5.width) {
+      this.position.set(0, this.position.y);
+    }
+    if (this.position.x < 0) {
+      this.position.set(this.p5.width, this.position.y);
+    }
+    if (this.position.y > this.p5.height) {
+      this.position.set(this.position.x, 0);
+    }
+    if (this.position.y < 0) {
+      this.position.set(this.position.x, this.p5.height);
+    }
   }
 
 }
