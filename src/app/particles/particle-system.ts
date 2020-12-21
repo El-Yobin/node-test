@@ -3,8 +3,10 @@ import { Queue } from '../common/queue';
 
 export class ParticleSystem {
   private queue: Queue<Particle>;
+  private noiseOffset = 0;
 
-  constructor() {
+  constructor(
+  ) {
     this.queue = new Queue();
   }
 
@@ -12,8 +14,9 @@ export class ParticleSystem {
     this.queue.add(particle);
   }
 
-  public run(): void {
+  public run(p5): void {
     this.queue.getAllAsArray().forEach(particle => {
+      particle.acceleration.add((p5.noise(this.noiseOffset) - 0.5) * 2);
       particle.update();
       particle.show();
 
@@ -21,5 +24,7 @@ export class ParticleSystem {
         this.queue.get();
       }
     });
+
+    this.noiseOffset += 0.5;
   }
 }
