@@ -31,14 +31,12 @@ export class ParticlesComponent extends P5JSInvoker implements AfterViewInit {
   public setup(p5): void {
     this.p5Instance = p5;
     this.canvas = p5.createCanvas(1000, 600, p5.WEBGL);
-
-    setInterval(() => {
-      this.particleSystem.addParticle(new Particle(this.p5Instance, this.particleImage, 0, 0));
-    }, 75);
+    this.canvas.frameRate = 60;
   }
 
   public draw(p5): void {
     this.canvas.background(0);
+    this.particleSystem.addParticle(new Particle(this.p5Instance, this.particleImage, 0, 0));
     this.particleSystem.run(this.p5Instance);
   }
 }
