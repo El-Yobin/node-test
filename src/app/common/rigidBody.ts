@@ -14,6 +14,8 @@ export abstract class RigidBody {
     this.position = this.p5.createVector(0, 0);
   }
 
+  public abstract show(): void;
+
   public update(): void {
     this.applyAcceleration();
     this.resetAcceleration();
@@ -55,9 +57,3 @@ export abstract class RigidBody {
     this.acceleration.mult(0);
   }
 }
-
-// export class RigidBody extends BaseRigidBody {
-//   constructor(@Inject(P5_SERVICE_TOKEN) private p5InstanceService?: P5InstanceService){
-//     super(p5InstanceService.p5Instance);
-//   }
-// }

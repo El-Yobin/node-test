@@ -1,6 +1,6 @@
 import { RigidBody } from '../common/rigidBody';
 
-export class Particle extends RigidBody{
+export class SmokeParticle extends RigidBody{
   public position;
   public diameter;
   private opacity = 255;
