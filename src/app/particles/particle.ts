@@ -1,4 +1,3 @@
-import { p5InstanceExtensions } from 'p5';
 import { RigidBody } from '../common/rigidBody';
 
 export class Particle extends RigidBody{
@@ -8,12 +7,11 @@ export class Particle extends RigidBody{
   readonly rotation: number;
 
   constructor(
-   public p5: p5InstanceExtensions,
    public img: any,
    private x,
    private y,
 ) {
-    super(p5);
+    super();
     this.position = this.p5.createVector(x, y);
     this.diameter = 50;
     this.rotation = this.p5.random(this.p5.PI * 2);

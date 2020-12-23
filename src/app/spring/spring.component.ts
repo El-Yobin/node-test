@@ -28,7 +28,7 @@ export class SpringComponent extends P5JSInvoker implements AfterViewInit, OnDes
   public setup(p5): void {
     this.p5 = p5.createCanvas(1000, 600);
     this.p5.background(0);
-    this.bob = new Planet(p5, p5.createVector(0, 0), 1, 20);
+    this.bob = new Planet(p5.createVector(0, 0), 1, 20);
     this.origin = p5.createVector(0, -200);
   }
 

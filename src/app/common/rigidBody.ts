@@ -1,21 +1,18 @@
-import * as p5Methods from 'p5';
 import { p5InstanceExtensions } from 'p5';
+import { P5InstanceService } from './p5-instance.service';
 
 export abstract class RigidBody {
   public mass = 1;
   public position: any;
   public acceleration: any;
   public velocity: any;
+  protected p5: p5InstanceExtensions = P5InstanceService.p5Instance;
 
-  protected constructor(
-    protected p5: p5InstanceExtensions,
-  ) {
+  protected constructor() {
     this.acceleration = this.p5.createVector(0, 0);
     this.velocity = this.p5.createVector(0, 0);
     this.position = this.p5.createVector(0, 0);
   }
-
-  abstract show(): void;
 
   public update(): void {
     this.applyAcceleration();
@@ -58,3 +55,9 @@ export abstract class RigidBody {
     this.acceleration.mult(0);
   }
 }
+
+// export class RigidBody extends BaseRigidBody {
+//   constructor(@Inject(P5_SERVICE_TOKEN) private p5InstanceService?: P5InstanceService){
+//     super(p5InstanceService.p5Instance);
+//   }
+// }

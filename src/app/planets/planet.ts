@@ -3,14 +3,11 @@ import { p5InstanceExtensions } from 'p5';
 
 export class Planet extends RigidBody {
   constructor(
-     public p5: p5InstanceExtensions,
      public position: any,
      public mass = 1,
      public radius: number,
   ) {
-    super(
-      p5,
-    );
+    super();
   }
 
   public show(): void {

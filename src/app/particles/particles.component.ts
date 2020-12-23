@@ -2,12 +2,12 @@ import { AfterViewInit, Component } from '@angular/core';
 import { P5JSInvoker } from '../common/p5JSInvoker';
 import { ParticleSystem } from './particle-system';
 import { Particle } from './particle';
-import * as p5Methods from 'p5';
+import { P5InstanceService } from '../common/p5-instance.service';
 
 @Component({
   selector: 'app-particles',
   templateUrl: '../common/template/template.component.html',
-  styleUrls: ['../common/template/template.component.scss']
+  styleUrls: ['../common/template/template.component.scss'],
 })
 export class ParticlesComponent extends P5JSInvoker implements AfterViewInit {
   private canvas: any;
@@ -30,13 +30,14 @@ export class ParticlesComponent extends P5JSInvoker implements AfterViewInit {
 
   public setup(p5): void {
     this.p5Instance = p5;
+    P5InstanceService.p5Instance = p5;
     this.canvas = p5.createCanvas(1000, 600, p5.WEBGL);
     this.canvas.frameRate = 60;
   }
 
   public draw(p5): void {
     this.canvas.background(0);
-    this.particleSystem.addParticle(new Particle(this.p5Instance, this.particleImage, 0, 0));
+    this.particleSystem.addParticle(new Particle(this.particleImage, 0, 0));
     this.particleSystem.run(this.p5Instance);
   }
 }
